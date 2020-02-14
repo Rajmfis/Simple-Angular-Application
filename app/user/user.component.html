@@ -1,0 +1,17 @@
+
+<a routerLink='/login'>Go to User</a>
+<table>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Contact</th>
+        <th>Email Id</th>
+    </tr>
+    <tr ngFor="let user of users">
+        <td>{{users.fname}}</td>
+        <td>{{users.lname}}</td>
+        <td>{{users.contactno}}</td>
+        <td>{{users.emailId}}</td>
+    </tr>
+</table>
+

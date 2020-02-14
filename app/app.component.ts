@@ -12,10 +12,14 @@ export class AppComponent {
    constructor(private fb: FormBuilder) {
     this.createForm();
   }
+  OnSubmit(){
+    console.log(this.angForm);
+  }
    createForm() {
     this.angForm = this.fb.group({
-       name: ['', Validators.required ],
-       address: ['', Validators.required ]
+       id: ['', Validators.required ],
+       pwd: ['', Validators.required ]
     });
+    
   }
 }
