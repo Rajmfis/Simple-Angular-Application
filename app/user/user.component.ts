@@ -12,7 +12,6 @@ export class UserComponent implements OnInit {
   constructor(private auth:AuthService) { }
 
   ngOnInit(): void {
-    // localStorage.removeItem('currentUser');
   }
-
+    
 }

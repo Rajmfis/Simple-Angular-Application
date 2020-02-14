@@ -34,14 +34,16 @@ export class LoginComponent implements OnInit {
       if(response.success===1){
         console.log(response);
         this.Auth.data=response;
-        // localStorage.setItem('currentUser', JSON.stringify(response.fname));
+        localStorage.setItem('currentUser', JSON.stringify(response.fname));
         this.router.navigate(['/user', ]);
       }else{
         alert('invalid user');
       }
-      
     })
     console.log(userid+' '+pwd);
+  }
+  logout() {
+    localStorage.removeItem('currentUser');
   }
 
  
