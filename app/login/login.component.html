@@ -1,5 +1,38 @@
-<form [formGroup]="angForm" (submit)="loginUser($event)">
-  <input type="text" id="userid" placeholder="id">
-  <input type="password" id="userpwd">
+<!-- <form [formGroup]="angForm">
+  <input type="text"placeholder="id">
+  <input type="password" >
   <input type="submit">
+</form> -->
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<div class="container" style="padding: 50px 0px;">
+  <h3>Please enter the details below</h3>
+
+<form [formGroup]="angForm"  (submit)="loginUser($event)" novalidate>
+  <div class="form-group">
+      <label>Id:</label>
+      <input class="form-control"  id="userid"  formControlName="id" type="text">
+  </div>
+  <div *ngIf="angForm.controls['id'].invalid && (angForm.controls['id'].dirty || angForm.controls['id'].touched)" class="alert alert-danger">
+      <div *ngIf="angForm.controls['id'].errors.required">
+        Id is required.
+      </div>
+  </div>
+   <div class="form-group">
+      <label>Password:</label>
+      <input class="form-control" id="userpwd" formControlName="password" type="password">
+  </div>
+  <div *ngIf="angForm.controls['password'].invalid && (angForm.controls['password'].dirty || angForm.controls['password'].touched)" class="alert alert-danger">
+      <div *ngIf="angForm.controls['password'].errors.required">
+        Password is required.
+      </div>
+  </div>
+  <button type="submit"
+      [disabled]="angForm.pristine || angForm.invalid" class="btn btn-success">
+      Submit
+  </button>
 </form>
+</div>
