@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import {AuthService} from '../auth.service';
 import { Router } from '@angular/router';
+import { PlatformLocation } from '@angular/common'
+
 
 @Component({
   selector: 'app-login',
@@ -11,8 +13,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   angForm: FormGroup;
-  constructor(private fb: FormBuilder,private Auth:AuthService,private router: Router) {this.createForm();}
-  // get f() { return this.angForm.controls; }
+  constructor(private fb: FormBuilder,private Auth:AuthService,private router: Router) {
+    this.createForm();
+    this.Auth.data='';
+  }
+
   ngOnInit(): void {
     
   }
@@ -32,9 +37,9 @@ export class LoginComponent implements OnInit {
     this.Auth.getUserDetails(userid, pwd)
     .subscribe((response) =>{
       if(response.success===1){
+        this.Auth.isloggedIn = true;
         console.log(response);
         this.Auth.data=response;
-        localStorage.setItem('currentUser', JSON.stringify(response.fname));
         this.router.navigate(['/user', ]);
       }else{
         alert('invalid user');
@@ -42,9 +47,7 @@ export class LoginComponent implements OnInit {
     })
     console.log(userid+' '+pwd);
   }
-  logout() {
-    localStorage.removeItem('currentUser');
-  }
-
+  
+  
  
 }

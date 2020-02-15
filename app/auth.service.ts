@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders} from '@angular/common/http';
-
+import { BehaviorSubject } from 'rxjs';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  user = new BehaviorSubject<User>(null);
   private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   constructor(private http:HttpClient) { }
 
+	public isloggedIn: boolean = false;
   public data;
 
   getUserDetails(id,pwd){
@@ -23,5 +26,8 @@ export class AuthService {
     //   console.log(data, "We got from the server")
     //   this.data = data;
     // }) 
+  }
+  logout() {
+    this.user.next(null);
   }
 }
