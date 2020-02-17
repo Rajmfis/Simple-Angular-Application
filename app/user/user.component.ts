@@ -12,11 +12,22 @@ export class UserComponent implements OnInit {
 
   users=this.auth.data;
   constructor(private auth:AuthService,private router:Router) { }
-
+  id:any;
   ngOnInit(): void {
-    
+    this.users=JSON.parse(localStorage.getItem('jwt_token'));
   }
-  logout(){
+  deleteUser(){
+    this.id=this.users.id;
+    this.auth.delete(this.id).subscribe((response) =>{
+      if(response.success===0){
+        alert('user not deleted');
+      }else{
+        alert('User deleted');
+      }
+    });
+  }
+  
+  OnLogout(){
     this.auth.logout();
   }
 }

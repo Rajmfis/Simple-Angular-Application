@@ -9,6 +9,10 @@ import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LogoutComponent } from './logout/logout.component';
+import {AuthGuard} from './auth.guard';
+import {CanActivate, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import { DeleteuserComponent } from './deleteuser/deleteuser.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +21,8 @@ import { LogoutComponent } from './logout/logout.component';
     UserComponent,
     HomeComponent,
     ProfileComponent,
-    LogoutComponent
+    LogoutComponent,
+    DeleteuserComponent
   ],
   imports: [
     BrowserModule,HttpClientModule,FormsModule, ReactiveFormsModule,RouterModule.forRoot([{
@@ -30,15 +35,20 @@ import { LogoutComponent } from './logout/logout.component';
     },
     {
       path:'user',
-      component:UserComponent
+      component:UserComponent,
+      canActivate: [AuthGuard]
     },
     {
       path:'profile',
       component:ProfileComponent
     },
+    
   ])
   ],
-  providers: [],
+  providers: [{
+    provide: 'AuthGuard',
+    useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,13 +10,13 @@
        <ul class="navbar-nav ml-auto">' 
          <li class="nav-item"> <a class="nav-link" href="#"><span style="color:whitesmoke;font-size: x-large;">Home</span></a>
          </li>
-          <li class="nav-item"> <a class="nav-link" id="delbtn" href="#"><span style="color:whitesmoke;font-size: x-large;">DeleteUser</span></a>
+          <li class="nav-item"> <a class="nav-link" id="delbtn" href="#"><span style="color:whitesmoke;font-size: x-large;" (click)='deleteUser()' >DeleteUser</span></a>
         </li>
         <li class="nav-item needmargin"> <a class="nav-link" href="#"><span style="color:whitesmoke;font-size:x-large;">Subscription</span></a>
                  </li>
         <li class="nav-item needmargin"> 
          
-        <a class="nav-link"> <span style="color:whitesmoke;font-size:x-large;" (click)="logout()">Logout</span></a>            
+        <a class="nav-link"> <span style="color:whitesmoke;font-size:x-large;" (click)='OnLogout()'>Logout</span></a>            
          </li>
        </ul>
      </div>
@@ -36,9 +36,9 @@
      <div class="card">
        <div class="card-body" ngFor="let user of users">
          <h5 class="card-title">Profile Details: </h5>
-         <p class="card-text">Name: {{users.fname}} {{users.lname}}</p> 
-         <p class="card-text">Email: {{users.emailId}}</p>
-         <p class="card-text">Contact Details: {{users.contactno}}</p>
+         <p class="card-text">Name: {{users.firstname}} {{users.lastname}}</p> 
+         <p class="card-text">Email: {{users.email}}</p>
+         <p class="card-text">Contact Details: {{users.contact}}</p>
          <a class="btn btn-primary"><span style="color:whitesmoke;">Change Password</span></a> 
        </div>
      </div>

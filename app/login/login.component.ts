@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import {AuthService} from '../auth.service';
 import { Router } from '@angular/router';
-import { PlatformLocation } from '@angular/common'
+
 
 
 @Component({
@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   angForm: FormGroup;
   constructor(private fb: FormBuilder,private Auth:AuthService,private router: Router) {
     this.createForm();
-    this.Auth.data='';
+    // this.Auth.data='';
+    localStorage.removeItem('jwt_token');
   }
 
   ngOnInit(): void {
@@ -37,9 +38,15 @@ export class LoginComponent implements OnInit {
     this.Auth.getUserDetails(userid, pwd)
     .subscribe((response) =>{
       if(response.success===1){
-        this.Auth.isloggedIn = true;
         console.log(response);
         this.Auth.data=response;
+        this.Auth.isLoggedIn=true;
+        this.Auth.generated_token=response.jwt;
+        this.Auth.data=response;
+        localStorage.setItem('jwt_token',JSON.stringify(response));
+        // localStorage.setItem('jwt_token',this.Auth.generated_token);
+        // localStorage.setItem('jwt_token',this.Auth.generated_token);
+        // localStorage.setItem('jwt_token',this.Auth.generated_token);
         this.router.navigate(['/user', ]);
       }else{
         alert('invalid user');
@@ -47,7 +54,5 @@ export class LoginComponent implements OnInit {
     })
     console.log(userid+' '+pwd);
   }
-  
-  
  
 }
