@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers,HttpClient,HttpHeaders} from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
 
@@ -19,14 +19,34 @@ export class AuthService {
 	public isLoggedIn: boolean = false;
   public data;
 
-
-  getUserDetails(id,pwd){
+  addUserDetails(fname, lname,phone,email,admin,pwd){
     //post these details to api server return 
-    return this.http.post('http://localhost:8080/tokengenerate/'+id, {
-      // id,
+    return this.http.post('http://localhost:8080/users', {
+      fname, lname,phone,email,admin,pwd
+    },this._options);
+  }
+
+  getUserDetails(email,pwd){
+    //post these details to api server return 
+    return this.http.post('http://localhost:8080/alert', {
+      email,
       pwd
     },this._options);
   }
+
+  getDecodedAccessToken(token: string): Observable<any> {
+
+    console.log("token = ", token);
+
+    
+  return this.http.post('http://localhost:8080/admin-users', {}, { 
+      headers: new HttpHeaders({
+        'jwt': token,
+      })
+    });
+
+  }
+
 
   delete(id){
     const token = localStorage.getItem('jwt_token');

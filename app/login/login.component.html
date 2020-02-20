@@ -13,7 +13,7 @@
 
 <form [formGroup]="angForm"  (submit)="loginUser($event)" novalidate>
   <div class="form-group">
-      <label>Id:</label>
+      <label>EmailId:</label>
       <input class="form-control"  id="userid"  formControlName="id" type="text">
   </div>
   <div *ngIf="angForm.controls['id'].invalid && (angForm.controls['id'].dirty || angForm.controls['id'].touched)" class="alert alert-danger">
